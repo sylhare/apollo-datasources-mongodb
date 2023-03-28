@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { EJSON } from 'bson'
-import { createCachingMethods, getNestedValue, idToString, isValidObjectIdString, prepFields } from '../cache'
+import { createCachingMethods, getNestedValue, idToString, isValidObjectIdString, prepFields } from '../src/cache'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
 import { hexId, objectID, wait } from './utils';
 

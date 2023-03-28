@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { MongoDataSource } from '../datasource';
+import { MongoDataSource } from '../src/datasource';
 
 export const hexId = '5cf82e14a220a607eb64a7d4'
 export const objectID = new ObjectId(hexId)

@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import mongoose, { model, Schema } from 'mongoose';
 import { MockDataSource, objectID } from './utils';
-import { getCollection, isCollectionOrModel, isModel } from '../helpers';
+import { getCollection, isCollectionOrModel, isModel } from '../src/helpers';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
 describe('Mongoose', () => {

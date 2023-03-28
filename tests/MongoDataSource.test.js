@@ -1,4 +1,4 @@
-import { MongoDataSource } from '../datasource'
+import { MongoDataSource } from '../src/datasource'
 import { MockDataSource } from './utils';
 
 describe('MongoDataSource', () => {
