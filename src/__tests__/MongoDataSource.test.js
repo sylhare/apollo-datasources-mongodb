@@ -1,10 +1,10 @@
-import { MongoClient, ObjectId } from 'mongodb'
+import { MongoClient } from 'mongodb'
 import mongoose, { Schema, model } from 'mongoose'
 
 import { MongoDataSource } from '../datasource'
 import { isModel, isCollectionOrModel, getCollection } from '../helpers'
+import { objectID } from "./utils";
 
-mongoose.set('useFindAndModify', false)
 
 class Users extends MongoDataSource {
   initialize(config) {
@@ -26,23 +26,21 @@ describe('MongoDataSource', () => {
 })
 
 const URL = 'mongodb://localhost:27017/test-apollo-datasource'
-const connectArgs = [
-  URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-]
-
 const connect = async () => {
-  const client = new MongoClient(...connectArgs)
-  await mongoose.connect(...connectArgs)
+  const client = new MongoClient(URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  await mongoose.connect(URL,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    })
   await client.connect()
   return client.db()
 }
-
-const hexId = '5cf82e14a220a607eb64a7d4'
-const objectID = ObjectId(hexId)
 
 describe('Mongoose', () => {
   let UserModel
@@ -65,7 +63,7 @@ describe('Mongoose', () => {
     nestedBob = await userCollection.findOneAndReplace(
       { name: 'Bob' },
       { name: 'Bob', nested: { _id: objectID, field1: 'value1', field2: '' } },
-      { new: true, upsert: true }
+      { upsert: true }
     )
   })
 
