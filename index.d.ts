@@ -1,4 +1,4 @@
-declare module 'apollo-datasource-mongodb' {
+declare module 'apollo-datasources-mongodb' {
   import { DataSource } from 'apollo-datasource'
   import { Collection as MongoCollection, ObjectId } from 'mongodb'
   import {

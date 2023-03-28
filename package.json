@@ -1,12 +1,12 @@
 {
   "name": "apollo-datasources-mongodb",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Apollo data source for MongoDB",
   "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "babel src -d dist --ignore **/*.test.js",
-    "dev": "babel src -d dist --watch --ignore **/*.test.js",
+    "build": "babel src -d dist --ignore */**/*.test.js",
+    "dev": "babel src -d dist --watch --ignore */**/*.test.js",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext=.js .",
     "test": "jest",
