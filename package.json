@@ -1,5 +1,5 @@
 {
-  "name": "apollo-datasource-mongo",
+  "name": "apollo-datasources-mongodb",
   "version": "3.0.0",
   "description": "Apollo data source for MongoDB",
   "main": "dist/index.js",
@@ -37,14 +37,14 @@
     "mongodb-memory-server": "^7.6.3",
     "mongoose": "^7.0.3"
   },
-  "homepage": "https://github.com/GraphQLGuide/apollo-datasource-mongodb",
+  "homepage": "https://github.com/sylhare/apollo-datasources-mongodb",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GraphQLGuide/apollo-datasource-mongodb"
+    "url": "git+https://github.com/sylhare/apollo-datasources-mongodb"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GraphQLGuide/apollo-datasource-mongodb/issues"
+    "url": "https://github.com/sylhare/apollo-datasources-mongodb/issues"
   },
   "author": "Loren Sands-Ramshaw <loren@graphql.guide> (https://graphql.guide)",
   "keywords": [

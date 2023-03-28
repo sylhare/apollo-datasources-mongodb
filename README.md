@@ -1,9 +1,9 @@
-[![npm version](https://badge.fury.io/js/apollo-datasource-mongodb.svg)](https://www.npmjs.com/package/apollo-datasource-mongodb)
+# Fork from [apollo-datasource-mongodb](https://github.com/GraphQLGuide/apollo-datasource-mongodb)
 
 Apollo [data source](https://www.apollographql.com/docs/apollo-server/features/data-sources) for MongoDB
 
 ```
-npm i apollo-datasource-mongodb
+npm i apollo-datasources-mongodb
 ```
 
 This package uses [DataLoader](https://github.com/graphql/dataloader) for batching and per-request memoization caching. It also optionally (if you provide a `ttl`) does shared application-level caching (using either the default Apollo `InMemoryLRUCache` or the [cache you provide to ApolloServer()](https://www.apollographql.com/docs/apollo-server/features/data-sources#using-memcachedredis-as-a-cache-storage-backend)). It does this for the following methods:
@@ -11,26 +11,6 @@ This package uses [DataLoader](https://github.com/graphql/dataloader) for batchi
 - [`findOneById(id, options)`](#findonebyid)
 - [`findManyByIds(ids, options)`](#findmanybyids)
 - [`findByFields(fields, options)`](#findbyfields)
-
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Contents:**
-
-- [Usage](#usage)
-  - [Basic](#basic)
-  - [Batching](#batching)
-  - [Caching](#caching)
-  - [TypeScript](#typescript)
-- [API](#api)
-  - [findOneById](#findonebyid)
-  - [findManyByIds](#findmanybyids)
-  - [findByFields](#findbyfields)
-    - [Examples](#examples)
-  - [deleteFromCacheById](#deletefromcachebyid)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 ## Usage
 
