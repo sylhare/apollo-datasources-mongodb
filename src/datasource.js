@@ -1,16 +1,14 @@
 import { DataSource } from 'apollo-datasource'
-import { ApolloError } from 'apollo-server-errors'
-import { InMemoryLRUCache } from 'apollo-server-caching'
-
 import { createCachingMethods } from './cache'
 import { isCollectionOrModel, isModel } from './helpers'
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
 
 class MongoDataSource extends DataSource {
   constructor(collection) {
     super()
 
     if (!isCollectionOrModel(collection)) {
-      throw new ApolloError(
+      throw new Error(
         'MongoDataSource constructor must be given a collection or Mongoose model'
       )
     }
