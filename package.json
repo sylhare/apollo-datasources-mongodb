@@ -1,44 +1,41 @@
 {
-  "name": "apollo-datasource-mongodb",
-  "version": "0.5.4",
+  "name": "apollo-datasource-mongo",
+  "version": "3.0.0",
   "description": "Apollo data source for MongoDB",
   "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "babel src -d dist --ignore **/*.test.js",
     "dev": "babel src -d dist --watch --ignore **/*.test.js",
-    "test": "jest --watch",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --fix --ext=.js .",
+    "test": "jest",
     "ci": "jest --ci",
-    "prepublishOnly": "npm run build",
-    "prettify": "prettier --write **/*.js",
-    "release": "release patch && echo 'A Github Action will now publish to NPM! 🚀'"
+    "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=8"
   },
   "dependencies": {
-    "@types/mongodb": "^3.5.27",
-    "apollo-datasource": "^0.3.1",
-    "apollo-server-caching": "^0.3.1",
-    "apollo-server-errors": "^2.4.1",
-    "bson": "^4.1.0",
-    "dataloader": "^1.4.0"
+    "@apollo/utils.keyvaluecache": "^2.1.0",
+    "apollo-datasource": "^3.3.2",
+    "bson": "^5.0.1",
+    "dataloader": "^2.2.2"
   },
   "peerDependencies": {
+    "mongodb": "*",
     "mongoose": "*"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.3",
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
-    "babel-jest": "^24.9.0",
-    "graphql": "^14.6.0",
-    "jest": "^24.9.0",
-    "mongodb": "^3.5.9",
-    "mongoose": "^5.13.8",
-    "prettier": "^1.19.1",
-    "release": "^6.3.0",
-    "waait": "^1.0.5"
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.36.0",
+    "jest": "^29.5.0",
+    "mongodb": "^5.1.0",
+    "mongodb-memory-server": "^7.6.3",
+    "mongoose": "^7.0.3"
   },
   "homepage": "https://github.com/GraphQLGuide/apollo-datasource-mongodb",
   "repository": {
