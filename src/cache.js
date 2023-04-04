@@ -1,6 +1,5 @@
 import DataLoader from 'dataloader'
-import { ObjectId } from 'mongodb'
-import { EJSON } from 'bson'
+import { EJSON, ObjectId } from 'bson'
 
 import { getCollection, log } from './helpers'
 
