@@ -1,12 +1,17 @@
-# Fork from [apollo-datasource-mongodb](https://github.com/GraphQLGuide/apollo-datasource-mongodb)
+# Fork from [apollo-datasource-mongodb][1]
 
-Apollo [data source](https://www.apollographql.com/docs/apollo-server/features/data-sources) for MongoDB
+> Why the fork? Main is outdated and not maintained.
+
+Apollo [data source][2] for MongoDB
 
 ```
 npm i apollo-datasources-mongodb
 ```
 
-This package uses [DataLoader](https://github.com/graphql/dataloader) for batching and per-request memoization caching. It also optionally (if you provide a `ttl`) does shared application-level caching (using either the default Apollo `InMemoryLRUCache` or the [cache you provide to ApolloServer()](https://www.apollographql.com/docs/apollo-server/features/data-sources#using-memcachedredis-as-a-cache-storage-backend)). It does this for the following methods:
+This package uses [DataLoader][3] for batching and per-request memoization caching. 
+It also optionally if provided with `ttl` does application-level caching 
+(using either the default Apollo `InMemoryLRUCache` or the [cache you provide to ApolloServer()][5]). 
+It does this for the following methods:
 
 - [`findOneById(id, options)`](#findonebyid)
 - [`findManyByIds(ids, options)`](#findmanybyids)
@@ -16,7 +21,8 @@ This package uses [DataLoader](https://github.com/graphql/dataloader) for batchi
 
 ### Basic
 
-The basic setup is subclassing `MongoDataSource`, passing your collection or Mongoose model to the constructor, and using the [API methods](#API):
+The basic setup is subclassing `MongoDataSource`, passing your collection or Mongoose model to the constructor, 
+and using the [API methods](#API):
 
 `data-sources/Users.js`
 
@@ -51,7 +57,10 @@ const server = new ApolloServer({
 })
 ```
 
-Inside the data source, the collection is available at `this.collection` (e.g. `this.collection.update({_id: 'foo, { $set: { name: 'me' }}})`). The model (if you're using Mongoose) is available at `this.model` (`new this.model({ name: 'Alice' })`). The request's context is available at `this.context`. For example, if you put the logged-in user's ID on context as `context.currentUserId`:
+Inside the data source, the collection is available at `this.collection` (e.g. `this.collection.update({_id: 'foo, { $set: { name: 'me' }}})`). 
+The model (if you're using Mongoose) is available at `this.model` (`new this.model({ name: 'Alice' })`). 
+The request's context is available at `this.context`. 
+For example, if you put the logged-in user's ID on context as `context.currentUserId`:
 
 ```js
 class Users extends MongoDataSource {
@@ -78,7 +87,10 @@ class Users extends MongoDataSource {
 }
 ```
 
-If you're passing a Mongoose model rather than a collection, Mongoose will be used for data fetching. All transformations defined on that model (virtuals, plugins, etc.) will be applied to your data before caching, just like you would expect it. If you're using reference fields, you might be interested in checking out [mongoose-autopopulate](https://www.npmjs.com/package/mongoose-autopopulate).
+If you're passing a Mongoose model rather than a collection, Mongoose will be used for data fetching. 
+All transformations defined on that model (virtuals, plugins, etc.) will be applied to your data before caching, 
+just like you would expect it. 
+If you're using reference fields, you might be interested in checking out [mongoose-autopopulate][4].
 
 ### Batching
 
@@ -118,7 +130,8 @@ const server = new ApolloServer({
 
 ### Caching
 
-To enable shared application-level caching, you do everything from the above section, and you add the `ttl` (in seconds) option to `findOneById()`:
+To enable shared application-level caching, you do everything from the above section, 
+and you add the `ttl` (in seconds) option to `findOneById()`:
 
 ```js
 const MINUTE = 60
@@ -149,11 +162,16 @@ const resolvers = {
 }
 ```
 
-Here we also call [`deleteFromCacheById()`](#deletefromcachebyid) to remove the user from the cache when the user's data changes. If we're okay with people receiving out-of-date data for the duration of our `ttl`—in this case, for as long as a minute—then we don't need to bother adding calls to `deleteFromCacheById()`.
+Here we also call [`deleteFromCacheById()`](#deletefromcachebyid) to remove the user from the cache when the user's data changes. 
+If we're okay with people receiving out-of-date data for the duration of our `ttl`—in this case, 
+for as long as a minute—then we don't need to bother adding calls to `deleteFromCacheById()`.
 
 ### TypeScript
 
-Since we are using a typed language, we want the provided methods to be correctly typed as well. This requires us to make the `MongoDataSource` class polymorphic. It requires 1-2 template arguments. The first argument is the type of the document in our collection. The second argument is the type of context in our GraphQL server, which defaults to `any`. For example:
+Since we are using a typed language, we want the provided methods to be correctly typed as well. 
+This requires us to make the `MongoDataSource` class polymorphic. It requires 1-2 template arguments. 
+The first argument is the type of the document in our collection. 
+The second argument is the type of context in our GraphQL server, which defaults to `any`. For example:
 
 `data-sources/Users.ts`
 
@@ -212,7 +230,8 @@ The type of the `id` argument must match the type used in the database. We curre
 
 `this.findOneById(id, { ttl })`
 
-Resolves to the found document. Uses DataLoader to load `id`. DataLoader uses `collection.find({ _id: { $in: ids } })`. Optionally caches the document if `ttl` is set (in whole positive seconds).
+Resolves to the found document. Uses DataLoader to load `id`. DataLoader uses `collection.find({ _id: { $in: ids } })`. 
+Optionally caches the document if `ttl` is set (in whole positive seconds).
 
 ### findManyByIds
 
@@ -224,7 +243,8 @@ Calls [`findOneById()`](#findonebyid) for each id. Resolves to an array of docum
 
 `this.findByFields(fields, { ttl })`
 
-Resolves to an array of documents matching the passed fields. If an empty object is passed as the `fields` parameter, resolves to an array containing all documents in the given collection.
+Resolves to an array of documents matching the passed fields. If an empty object is passed as the `fields` parameter, 
+resolves to an array containing all documents in the given collection.
 
 `fields` has this type:
 
@@ -272,4 +292,11 @@ Deletes a document from the cache that was fetched with `findOneById` or `findMa
 
 `this.deleteFromCacheByFields(fields)`
 
-Deletes a document from the cache that was fetched with `findByFields`. Fields should be passed in exactly the same way they were used to find with.
+Deletes a document from the cache that was fetched with `findByFields`. 
+Fields should be passed in exactly the same way they were used to find with.
+
+[1]: https://github.com/GraphQLGuide/apollo-datasource-mongodb
+[2]: https://www.apollographql.com/docs/apollo-server/features/data-sources
+[3]: https://github.com/graphql/dataloader
+[4]: https://www.npmjs.com/package/mongoose-autopopulate
+[5]: https://www.apollographql.com/docs/apollo-server/features/data-sources#using-memcachedredis-as-a-cache-storage-backend
