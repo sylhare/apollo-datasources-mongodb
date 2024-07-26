@@ -1,7 +1,5 @@
 # Fork from [apollo-datasource-mongodb][1]
 
-> Why the fork? Main is outdated and not maintained.
-
 Apollo [data source][2] for MongoDB
 
 ```
